@@ -6,19 +6,26 @@ import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
-     TypeOrmModule.forRoot({
+    TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'root',
-      database: 'banking_db',
+
+      host: process.env.DB_HOST,
+
+      port: Number(process.env.DB_PORT),
+
+      username: process.env.DB_USERNAME,
+
+      password: process.env.DB_PASSWORD,
+
+      database: process.env.DB_NAME,
+
       autoLoadEntities: true,
-      synchronize: true, // dev only
+
+      synchronize: true,
     }),
-     UserModule,
-     AccountsModule,
-     TransactionModule,
+    UserModule,
+    AccountsModule,
+    TransactionModule,
   ]
 })
-export class AppModule {}
+export class AppModule { }
